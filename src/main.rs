@@ -7,11 +7,16 @@ use rand::{Rng, rng};
 use textplots::{Chart, Plot, Shape};
 
 fn main() {
+    test_performance();
+}
+
+fn print_chart() {
     Chart::new(360, 120, 0., 10000.)
         .lineplot(&Shape::Continuous(Box::new(|x| {
             components_with_x_nodes_y_edges_per_node(x as i32, 5) as f32
         })))
         .display();
+    test_performance();
 }
 
 fn components_with_x_nodes_y_edges_per_node(x: i32, y: i32) -> i32 {
@@ -29,7 +34,7 @@ fn components_with_x_nodes_y_edges_per_node(x: i32, y: i32) -> i32 {
     c.count_connected_components(&g)
 }
 
-fn old_main() {
+fn test_performance() {
     let global_start_time = Instant::now();
     let mut rng = rng();
     println!("this is a rust implementation");
